@@ -43,12 +43,12 @@ public class VNMDayActivity extends AppCompatActivity {
 	protected TextView vnmDayOfMonthInText;
 	protected TextView vnmMonthText;
 	protected TextView vnmMonthInText;
+	protected TextView tvToday;
 	
     /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
     	super.onCreate(savedInstanceState);
-//        BackgroundManager.init(this);
 
 		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
 				WindowManager.LayoutParams.FLAG_FULLSCREEN);
@@ -56,16 +56,17 @@ public class VNMDayActivity extends AppCompatActivity {
         this.setContentView(R.layout.main);
         LinearLayout main = findViewById(R.id.main);
 		monthText = findViewById(R.id.monthText);
-		this.vnmHourText =  findViewById(R.id.vnmHourText);
-		this.vnmHourInText =  findViewById(R.id.vnmHourInText);
-		this.vnmDayOfMonthText =  findViewById(R.id.vnmDayOfMonthText);
-		this.vnmDayOfMonthInText =  findViewById(R.id.vnmDayOfMonthInText);
-		this.vnmMonthText =  findViewById(R.id.vnmMonthText);
-		this.vnmMonthInText =  findViewById(R.id.vnmMonthInText);
+		vnmHourText =  findViewById(R.id.vnmHourText);
+		vnmHourInText =  findViewById(R.id.vnmHourInText);
+		vnmDayOfMonthText =  findViewById(R.id.vnmDayOfMonthText);
+		vnmDayOfMonthInText =  findViewById(R.id.vnmDayOfMonthInText);
+		vnmMonthText =  findViewById(R.id.vnmMonthText);
+		vnmMonthInText =  findViewById(R.id.vnmMonthInText);
+		tvToday = findViewById(R.id.txttoday);
         
         LayoutParams layoutParams1 = new LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT, 1.0f);
         main.addView(this.scrollView, layoutParams1);
-		;
+
 		
         this.scrollView.setOnScreenSelectedListener( new OnScreenSelectedListener() {
 			public void onSelected(int selectedIndex) {
@@ -74,8 +75,17 @@ public class VNMDayActivity extends AppCompatActivity {
         });        
         //Log.d("DEBUG", StreamUtils.readAllText(getResources().openRawResource(R.raw.test)));
 		selectedDate =  new Date();
-        showDate(new Date());
-		init(new Date());
+        showDate(selectedDate);
+		init(selectedDate);
+		Calendar calendar =  Calendar.getInstance();
+		calendar.setTime(selectedDate);
+		tvToday.setText(calendar.get(Calendar.DAY_OF_MONTH)+"");
+		tvToday.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				showDate(selectedDate);
+			}
+		});
     }
     
     private void showDate(Date date) {
@@ -85,7 +95,6 @@ public class VNMDayActivity extends AppCompatActivity {
 			ScrollableDayView view = new ScrollableDayView(this);
 	    	view.setOnDateChangedListener(onDateChangedListener);
 	    	view.setOnClickListener(onClickListener);
-//			view.setBackgroundDrawable(BackgroundManager.getRandomBackground());
 			this.scrollView.addView(view);		
 		}
     	    	

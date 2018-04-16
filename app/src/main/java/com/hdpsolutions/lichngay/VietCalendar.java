@@ -37,12 +37,13 @@ public class VietCalendar {
     	Holiday h3 = new Holiday(3, 1, false, true, "Mồng ba tết Âm lịch");
     	Holiday h4 = new Holiday(10, 3, false, true, "Giỗ tổ Hùng Vương");
     	Holiday h5 = new Holiday(1, 1, true, true, "Tết Dương lịch");
-    	Holiday h6 = new Holiday(30, 4, true, true, "Ngày thống nhất đất nước");
+    	Holiday h6 = new Holiday(30, 4, true, true, "Ngày giải phóng Miền Nam thống nhất đất nước");
     	Holiday h7 = new Holiday(1, 5, true, true, "Ngày Quốc tế lao động");
     	Holiday h8 = new Holiday(2, 9, true, true, "Ngày Quốc khánh");
     	Holiday h9 = new Holiday(14, 2, true, false, "Ngày lễ tình nhân");
     	Holiday h10 = new Holiday(8, 3, true, false, "Ngày quốc tế phụ nữ");
     	Holiday h11 = new Holiday(20, 10, true, false, "Ngày phụ nữ Việt Nam");
+        Holiday h12 = new Holiday(20, 11, true, false, "Ngày nhà giáo Việt Nam");
     	HOLIDAYS = new Holiday[] {h1, h2, h3, h4, h5, h6, h7, h8, h9, h10, h11};
     }
     

@@ -117,10 +117,10 @@ public class DayView extends FrameLayout {
 			this.noteText.setText(famousSaying);
 		}
 
-		if (eventSumarize != null && eventSumarize.length() > 0) {
-			this.noteText.setTextColor(this.eventColor);
-			this.noteText.setText(eventSumarize);
-		}
+//		if (eventSumarize != null && eventSumarize.length() > 0) {
+//			this.noteText.setTextColor(this.eventColor);
+//			this.noteText.setText(eventSumarize);
+//		}
 		
 		this.dayOfMonthText.setShadowLayer(1.2f, 1.0f, 1.0f, getResources().getColor(R.color.shadowColor));		
 		this.invalidate();

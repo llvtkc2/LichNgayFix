@@ -1,27 +1,16 @@
 package com.hdpsolutions.lichngay;
 
-import android.app.AlertDialog;
-import android.app.Dialog;
-import android.content.ComponentName;
-import android.content.Intent;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
+
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.ViewGroup;
 import android.view.WindowManager;
-import android.widget.DatePicker;
 import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
 import com.hdpsolutions.lichngay.ui.ScrollableDayView;
 import com.hdpsolutions.lichngay.ui.ScrollableDayView.OnDateChangedListener;
 import com.hdpsolutions.lichngay.widget.HorizontalScrollView;
@@ -31,8 +20,6 @@ import java.util.Calendar;
 import java.util.Date;
 
 public class VNMDayActivity extends AppCompatActivity {
-	private static final int MENU_SELECT_DATE = 1;
-	private static final int MENU_SELECT_TODAY = 2;
 	
 	private HorizontalScrollView scrollView;
 	private Date selectedDate;
@@ -72,8 +59,7 @@ public class VNMDayActivity extends AppCompatActivity {
 			public void onSelected(int selectedIndex) {
 				prepareOtherViews(selectedIndex);				
 			}
-        });        
-        //Log.d("DEBUG", StreamUtils.readAllText(getResources().openRawResource(R.raw.test)));
+        });
 		selectedDate =  new Date();
         showDate(selectedDate);
 		init(selectedDate);

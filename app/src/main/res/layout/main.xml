@@ -71,4 +71,148 @@
 			android:textColor="@android:color/white"
 			android:textStyle="bold" />
 	</FrameLayout>
+
+	<RelativeLayout
+		android:layout_gravity="bottom"
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:layout_weight="4"
+		android:orientation="vertical">
+
+		<TableLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_alignParentBottom="true"
+			android:background="@drawable/bgbt2"
+			android:paddingBottom="1sp"
+			android:paddingTop="1sp"
+			android:stretchColumns="*">
+
+			<TableRow android:layout_marginBottom="1sp">
+
+				<TextView
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_weight="1"
+					android:gravity="center"
+					android:padding="2px"
+					android:text="Giờ"
+					android:textColor="@android:color/white"
+					android:textSize="20dp" />
+
+				<TextView
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_marginLeft="1sp"
+					android:layout_weight="1"
+					android:gravity="center"
+					android:padding="2px"
+					android:text="Ngày"
+					android:textColor="@android:color/white"
+					android:textSize="20dp" />
+
+				<TextView
+					android:id="@+id/textView"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_marginLeft="1sp"
+					android:layout_weight="1"
+					android:gravity="center"
+					android:padding="2px"
+					android:text="Tháng"
+					android:textColor="@android:color/white"
+					android:textSize="20dp" />
+			</TableRow>
+
+			<TableRow>
+
+				<LinearLayout
+					android:layout_width="match_parent"
+					android:layout_height="match_parent"
+					android:layout_weight="1"
+					android:gravity="center"
+					android:orientation="vertical">
+
+					<TextView
+						android:id="@+id/vnmHourText"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:layout_marginBottom="5sp"
+						android:gravity="center"
+						android:text="1:23"
+						android:textColor="@android:color/white"
+						android:textSize="29dp"
+						android:textStyle="bold" />
+
+					<TextView
+						android:id="@+id/vnmHourInText"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:gravity="center"
+						android:text="Quý sửu"
+						android:textColor="@android:color/white"
+						android:textSize="@dimen/luner_table_hdpi_v4_font_size" />
+				</LinearLayout>
+
+				<LinearLayout
+					android:layout_width="fill_parent"
+					android:layout_height="fill_parent"
+					android:layout_marginLeft="1sp"
+					android:layout_weight="1"
+					android:gravity="center"
+					android:orientation="vertical">
+
+					<TextView
+						android:id="@+id/vnmDayOfMonthText"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:layout_marginBottom="5sp"
+						android:gravity="center"
+						android:text="23"
+						android:textColor="@android:color/holo_red_dark"
+						android:textSize="29dp"
+						android:textStyle="bold" />
+
+					<TextView
+						android:id="@+id/vnmDayOfMonthInText"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:gravity="center"
+						android:text="Quý hợi"
+						android:textColor="@android:color/white"
+						android:textSize="@dimen/luner_table_hdpi_v4_font_size" />
+				</LinearLayout>
+
+				<LinearLayout
+					android:layout_width="fill_parent"
+					android:layout_height="fill_parent"
+					android:layout_marginLeft="1sp"
+					android:layout_weight="1"
+					android:gravity="center"
+					android:orientation="vertical">
+
+					<TextView
+						android:id="@+id/vnmMonthText"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:layout_marginBottom="5sp"
+						android:gravity="center"
+						android:text="12"
+						android:textColor="@android:color/white"
+						android:textSize="29dp"
+						android:textStyle="bold" />
+
+					<TextView
+						android:id="@+id/vnmMonthInText"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:gravity="center"
+						android:text="Ất sửu"
+						android:textColor="@android:color/white"
+						android:textSize="@dimen/luner_table_hdpi_v4_font_size" />
+				</LinearLayout>
+
+			</TableRow>
+		</TableLayout>
+	</RelativeLayout>
 </FrameLayout>

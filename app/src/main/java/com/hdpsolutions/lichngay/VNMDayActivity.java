@@ -37,6 +37,12 @@ public class VNMDayActivity extends AppCompatActivity {
 	private HorizontalScrollView scrollView;
 	private Date selectedDate;
 	private TextView monthText;
+	protected TextView vnmHourText;
+	protected TextView vnmHourInText;
+	protected TextView vnmDayOfMonthText;
+	protected TextView vnmDayOfMonthInText;
+	protected TextView vnmMonthText;
+	protected TextView vnmMonthInText;
 	
     /** Called when the activity is first created. */
     @Override
@@ -48,8 +54,14 @@ public class VNMDayActivity extends AppCompatActivity {
 				WindowManager.LayoutParams.FLAG_FULLSCREEN);
         this.scrollView = new HorizontalScrollView(this);
         this.setContentView(R.layout.main);
-        LinearLayout main = (LinearLayout)findViewById(R.id.main);
-		monthText = (TextView)findViewById(R.id.monthText);
+        LinearLayout main = findViewById(R.id.main);
+		monthText = findViewById(R.id.monthText);
+		this.vnmHourText =  findViewById(R.id.vnmHourText);
+		this.vnmHourInText =  findViewById(R.id.vnmHourInText);
+		this.vnmDayOfMonthText =  findViewById(R.id.vnmDayOfMonthText);
+		this.vnmDayOfMonthInText =  findViewById(R.id.vnmDayOfMonthInText);
+		this.vnmMonthText =  findViewById(R.id.vnmMonthText);
+		this.vnmMonthInText =  findViewById(R.id.vnmMonthInText);
         
         LayoutParams layoutParams1 = new LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT, 1.0f);
         main.addView(this.scrollView, layoutParams1);
@@ -63,6 +75,7 @@ public class VNMDayActivity extends AppCompatActivity {
         //Log.d("DEBUG", StreamUtils.readAllText(getResources().openRawResource(R.raw.test)));
 		selectedDate =  new Date();
         showDate(new Date());
+		init(new Date());
     }
     
     private void showDate(Date date) {
@@ -102,6 +115,7 @@ public class VNMDayActivity extends AppCompatActivity {
     		nextView.setDate(addDays(currentDate, +1));    					    		
     		this.scrollView.rotateFirstView();
     	}
+    	init(currentDate);
 	}
     
     private Date addDays(Date date, int days) {
@@ -110,27 +124,6 @@ public class VNMDayActivity extends AppCompatActivity {
     	cal.add(Calendar.DATE, days);
     	return cal.getTime();
     }
-    
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-    	menu.add(0, MENU_SELECT_DATE, 0, "Chọn ngày").setIcon(android.R.drawable.ic_menu_day);
-    	menu.add(0, MENU_SELECT_TODAY, 0, "Hôm nay").setIcon(android.R.drawable.ic_menu_today);
-    	//menu.add(0, MENU_SETTINGS, 0, "Tùy chọn").setIcon(android.R.drawable.ic_menu_preferences);
-    	return true;
-    }
-
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		if (item.getItemId() == MENU_SELECT_DATE) {
-			selectDate();
-		} else if (item.getItemId() == MENU_SELECT_TODAY) {
-			showDate(new Date());
-		}
-		return true;
-	}
-	public void selectDate() {
-		Toast.makeText(this, "ok đang làm", Toast.LENGTH_SHORT).show();
-	}
 
 	private Date getCurrentDate() {
 		int selectedIndex = this.scrollView.getDisplayedChild();
@@ -162,14 +155,34 @@ public class VNMDayActivity extends AppCompatActivity {
     		ScrollableDayView nextView = (ScrollableDayView)scrollView.getChildAt(2);
     		nextView.setDate(addDays(date, +1));
 
-			Calendar calendar = Calendar.getInstance();
-			calendar.setTime(date);
-			int month = calendar.get(Calendar.MONTH) + 1;
-			int year = calendar.get(Calendar.YEAR);
-			monthText.setText(month + "-" + year);
+			init(date);
 
 
 		}		
 	};
+
+	private void init(Date date) {
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(date);
+
+		int dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH);
+		int hour = calendar.get(Calendar.HOUR_OF_DAY);
+		int minute = calendar.get(Calendar.MINUTE);
+		int month = calendar.get(Calendar.MONTH) + 1;
+		int year = calendar.get(Calendar.YEAR);
+
+		VNMDate vnmDate = VietCalendar.convertSolar2LunarInVietnamese(date);
+
+		monthText.setText(month + "-" + year);
+		vnmHourText.setText(hour + ":" + minute);
+		vnmDayOfMonthText.setText(vnmDate.getDayOfMonth() + "");
+		vnmMonthText.setText(vnmDate.getMonth() + "");
+
+		String[] vnmCalendarTexts = VietCalendar.getCanChiInfo(vnmDate.getDayOfMonth(), vnmDate.getMonth(), vnmDate.getYear(), dayOfMonth, month, year);
+
+		vnmHourInText.setText(vnmCalendarTexts[VietCalendar.HOUR]);
+		vnmDayOfMonthInText.setText(vnmCalendarTexts[VietCalendar.DAY]);
+		vnmMonthInText.setText(vnmCalendarTexts[VietCalendar.MONTH]+"\n"+vnmCalendarTexts[VietCalendar.YEAR]);
+	}
 
 }

@@ -29,16 +29,7 @@ public class DayView extends FrameLayout {
 	private TextView dayOfWeekText;
 	private TextView noteText;
 	private ImageView bground;
-	
-	protected TextView vnmHourText;
-	protected TextView vnmHourInText;
-	protected TextView vnmDayOfMonthText;
-	protected TextView vnmDayOfMonthInText;
-	protected TextView vnmMonthText;
-	protected TextView vnmMonthInText;
-	protected TextView vnmYearText;
-	protected TextView vnmYearInText;
-	
+
 	private Date displayDate;
 			
 	private int dayOfWeekColor;
@@ -66,19 +57,11 @@ public class DayView extends FrameLayout {
 		this.setFocusable(false);
 		this.setFocusableInTouchMode(false);
 		this.setDrawingCacheEnabled(true);
-		this.dayOfMonthText = (TextView)findViewById(R.id.dayOfMonthText);
-		this.dayOfWeekText = (TextView)findViewById(R.id.dayOfWeekText);
-		this.noteText = (TextView)findViewById(R.id.noteText);
-		
-		this.vnmHourText = (TextView) findViewById(R.id.vnmHourText);
-		this.vnmHourInText = (TextView) findViewById(R.id.vnmHourInText);
-		this.vnmDayOfMonthText = (TextView) findViewById(R.id.vnmDayOfMonthText);
-		this.vnmDayOfMonthInText = (TextView) findViewById(R.id.vnmDayOfMonthInText);
-		this.vnmMonthText = (TextView) findViewById(R.id.vnmMonthText);
-		this.vnmMonthInText = (TextView) findViewById(R.id.vnmMonthInText);
+		this.dayOfMonthText = findViewById(R.id.dayOfMonthText);
+		this.dayOfWeekText = findViewById(R.id.dayOfWeekText);
+		this.noteText = findViewById(R.id.noteText);
+
 		this.bground = findViewById(R.id.backgroundnen);
-//		this.vnmYearText = (TextView) findViewById(R.id.vnmYearText);
-//		this.vnmYearInText = (TextView) findViewById(R.id.vnmYearInText);
 		this.dayOfWeekColor = getResources().getColor(R.color.dayOfWeekColor);
 		this.weekendColor = getResources().getColor(R.color.weekendColor);
 		this.holidayColor = getResources().getColor(R.color.holidayColor);
@@ -107,33 +90,24 @@ public class DayView extends FrameLayout {
 		calendar.setTime(date);
 		int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
 		int dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH);
-		int hour = calendar.get(Calendar.HOUR_OF_DAY);
-		int minute = calendar.get(Calendar.MINUTE);
-		int month = calendar.get(Calendar.MONTH) + 1;
-		int year = calendar.get(Calendar.YEAR);
-		
-		VNMDate vnmDate = VietCalendar.convertSolar2LunarInVietnamese(date);
+
 		VietCalendar.Holiday holiday = VietCalendar.getHoliday(date);
 		if (dayOfWeek == 1) {
 			this.dayOfMonthText.setTextColor(this.dayOfWeekColor);
 			this.dayOfWeekText.setTextColor(this.weekendColor);
 			this.noteText.setTextColor(this.dayOfWeekColor);
-//			this.monthText.setTextColor(this.dayOfWeekColor);
+
 		} else if (holiday != null && holiday.isOffDay()) {
 			this.dayOfMonthText.setTextColor(this.dayOfWeekColor);
 			this.dayOfWeekText.setTextColor(this.holidayColor);
 			this.noteText.setTextColor(this.holidayColor);
-//			this.monthText.setTextColor(this.dayOfWeekColor);
-			if (!holiday.isSolar()) {
-				this.vnmDayOfMonthText.setTextColor(this.holidayColor);
-				this.vnmMonthText.setTextColor(this.dayOfWeekColor);
-//				this.vnmYearText.setTextColor(this.holidayColor);
-			}
+
+
 		} else {
 			this.dayOfMonthText.setTextColor(this.dayOfWeekColor);			
 			this.dayOfWeekText.setTextColor(this.dayOfWeekColor);
 			this.noteText.setTextColor(this.dayOfWeekColor);
-//			this.monthText.setTextColor(this.dayOfWeekColor);
+
 		}
 		this.dayOfMonthText.setText(dayOfMonth + "");
 		this.dayOfWeekText.setText(VietCalendar.getDayOfWeekText(dayOfWeek));
@@ -142,18 +116,7 @@ public class DayView extends FrameLayout {
 		} else {
 			this.noteText.setText(famousSaying);
 		}
-		
-		this.vnmHourText.setText(hour + ":" + minute);
-		this.vnmDayOfMonthText.setText(vnmDate.getDayOfMonth() + "");
-		this.vnmMonthText.setText(vnmDate.getMonth() + "");
-//		this.vnmYearText.setText(vnmDate.getYear() + "");
-		
-		String[] vnmCalendarTexts = VietCalendar.getCanChiInfo(vnmDate.getDayOfMonth(), vnmDate.getMonth(), vnmDate.getYear(), dayOfMonth, month, year);
-		
-		this.vnmHourInText.setText(vnmCalendarTexts[VietCalendar.HOUR]);
-		this.vnmDayOfMonthInText.setText(vnmCalendarTexts[VietCalendar.DAY]);
-		this.vnmMonthInText.setText(vnmCalendarTexts[VietCalendar.MONTH]);
-//		this.vnmYearInText.setText(vnmCalendarTexts[VietCalendar.YEAR]);
+
 		if (eventSumarize != null && eventSumarize.length() > 0) {
 			this.noteText.setTextColor(this.eventColor);
 			this.noteText.setText(eventSumarize);
@@ -196,8 +159,5 @@ public class DayView extends FrameLayout {
 		this.buildDrawingCache();
 	}
 	
-//	@Override
-//	public boolean onTouchEvent(MotionEvent event) {
-//		return true;
-//	}
+
 }

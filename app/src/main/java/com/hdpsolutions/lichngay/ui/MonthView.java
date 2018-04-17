@@ -8,7 +8,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewConfiguration;
 
-import com.hdpsolutions.lichngay.EventManager;
+import com.hdpsolutions.lichngay.calender.EventManager;
 import com.hdpsolutions.lichngay.R;
 
 import java.util.Calendar;

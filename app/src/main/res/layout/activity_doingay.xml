@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/body2"
+    android:layout_height="fill_parent"
+    android:orientation="vertical">
+
+        <RelativeLayout
+            android:background="@drawable/bg_buttonv2"
+            android:id="@+id/rl1"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="70dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tv1"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/ic_mattroi"
+                android:gravity="center|left"
+                android:padding="10dp"
+                android:text="       Ngày Dương"
+                android:textColor="#ffffff"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv1"
+                android:gravity="center">
+
+                <com.hdpsolutions.lichngay.widget.WheelView
+                    android:id="@+id/daySolar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+
+                <com.hdpsolutions.lichngay.widget.WheelView
+                    android:id="@+id/monthSolar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5" />
+
+                <com.hdpsolutions.lichngay.widget.WheelView
+                    android:id="@+id/yearSolar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+            </LinearLayout>
+        </RelativeLayout>
+
+    <ImageView
+        android:src="@drawable/ic_doingay"
+        android:layout_marginTop="10dp"
+        android:id="@+id/ld"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/rl1"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content" />
+
+
+        <RelativeLayout
+            android:id="@+id/rl2"
+            android:background="@drawable/bg_buttonv2"
+            android:layout_below="@+id/ld"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tv2"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/ic_matrang"
+                android:gravity="center|left"
+                android:padding="10dp"
+                android:text="  Ngày Âm"
+                android:textColor="#ffffff"
+                android:textStyle="bold"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv2"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <com.hdpsolutions.lichngay.widget.WheelView
+                    android:id="@+id/dayLunar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+
+                <com.hdpsolutions.lichngay.widget.WheelView
+                    android:id="@+id/monthLunar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5" />
+
+                <com.hdpsolutions.lichngay.widget.WheelView
+                    android:id="@+id/yearLunar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+            </LinearLayout>
+        </RelativeLayout>
+
+    <Button
+        android:id="@+id/xemngay"
+        android:layout_marginLeft="90dp"
+        android:layout_marginRight="90dp"
+        android:textColor="@android:color/white"
+        android:text="Vào Xem Ngày"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/rl2"
+        android:background="@drawable/bg_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <LinearLayout
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="1dp"
+        android:orientation="horizontal"
+        android:background="@drawable/bgbt2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/lichngay"
+            android:gravity="center|bottom"
+            android:textColor="@android:color/white"
+            android:text="Lịch Ngày"
+            android:drawableTop="@drawable/ic_lichngay"
+            android:layout_weight="1"
+            android:background="?attr/selectableItemBackground"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+        <TextView
+            android:id="@+id/lichthang"
+            android:gravity="center|bottom"
+            android:textColor="@android:color/white"
+            android:text="Lịch Tháng"
+            android:layout_weight="1"
+            android:background="?attr/selectableItemBackground"
+            android:drawableTop="@drawable/ic_lichthang"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/doingay"
+            android:gravity="center|bottom"
+            android:textColor="@android:color/white"
+            android:text="Đổi Ngày"
+            android:layout_weight="1"
+            android:background="?attr/selectableItemBackground"
+            android:drawableTop="@drawable/ic_doingay"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/nhieuhon"
+            android:gravity="center|bottom"
+            android:textColor="@android:color/white"
+            android:text="Nhiều Hơn"
+            android:layout_weight="1"
+            android:background="?attr/selectableItemBackground"
+            android:drawableTop="@drawable/ic_more"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <FrameLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight="8"
+        android:orientation="horizontal"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
+        <!--<View-->
+            <!--android:background="@drawable/bg_buttonv2"-->
+            <!--android:layout_margin="5dp"-->
+            <!--android:layout_width="50dp"-->
+            <!--android:layout_height="40dp"></View>-->
+        <!--<ImageButton-->
+            <!--android:layout_width="50dp"-->
+            <!--android:layout_height="40dp"-->
+            <!--android:layout_margin="5dp"-->
+            <!--android:background="?attr/selectableItemBackground"-->
+            <!--android:src="@drawable/ic_menu" />-->
+
+        <!--<View-->
+            <!--android:background="@drawable/bg_buttonv2"-->
+            <!--android:layout_width="50dp"-->
+            <!--android:layout_height="40dp"-->
+            <!--android:layout_marginLeft="60dp"-->
+            <!--android:layout_marginTop="5dp"></View>-->
+        <!--<TextView-->
+            <!--android:id="@+id/txttoday"-->
+            <!--android:layout_width="50dp"-->
+            <!--android:layout_height="40dp"-->
+            <!--android:layout_marginLeft="60dp"-->
+            <!--android:layout_marginTop="5dp"-->
+            <!--android:background="?attr/selectableItemBackground"-->
+            <!--android:gravity="center"-->
+            <!--android:text="17"-->
+            <!--android:textColor="@android:color/white"-->
+            <!--android:textStyle="bold" />-->
+
+        <View
+            android:background="@drawable/bgbt2"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_gravity="center|top"></View>
+        <TextView
+            android:paddingLeft="20dp"
+            android:gravity="center|left"
+            android:background="?attr/selectableItemBackground"
+            android:layout_marginTop="5dp"
+            android:id="@+id/monthText"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:text="Đổi Ngày  Âm - Dương"
+            android:textColor="@android:color/white"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+
+        <View
+            android:layout_marginRight="5dp"
+            android:layout_width="50dp"
+            android:layout_height="40dp"
+            android:layout_gravity="end"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/bg_buttonv2"></View>
+        <ImageButton
+            android:layout_marginRight="5dp"
+            android:layout_width="50dp"
+            android:layout_height="40dp"
+            android:background="?attr/selectableItemBackground"
+            android:layout_gravity="end"
+            android:layout_marginTop="5dp"
+            android:gravity="center"
+            android:src="@drawable/ic_event_note"
+            android:textColor="@android:color/white"
+            android:textStyle="bold" />
+
+        <View
+            android:layout_width="50dp"
+            android:layout_height="40dp"
+            android:layout_gravity="end"
+            android:layout_marginRight="60dp"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/bg_buttonv2"></View>
+        <ImageButton
+            android:layout_width="50dp"
+            android:layout_height="40dp"
+            android:layout_gravity="end"
+            android:layout_marginRight="60dp"
+            android:layout_marginTop="5dp"
+            android:background="?attr/selectableItemBackground"
+            android:gravity="center"
+            android:src="@android:drawable/ic_menu_share"
+            android:textColor="@android:color/white"
+            android:textStyle="bold" />
+    </FrameLayout>
+
+
+</RelativeLayout>

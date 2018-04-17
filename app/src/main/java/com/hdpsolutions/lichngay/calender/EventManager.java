@@ -1,4 +1,4 @@
-package com.hdpsolutions.lichngay;
+package com.hdpsolutions.lichngay.calender;
 
 import android.content.ContentResolver;
 import android.database.Cursor;

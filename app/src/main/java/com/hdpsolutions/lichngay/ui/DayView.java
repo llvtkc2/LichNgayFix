@@ -4,25 +4,21 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.PorterDuff.Mode;
-import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.hdpsolutions.lichngay.EventManager;
+import com.hdpsolutions.lichngay.calender.EventManager;
 import com.hdpsolutions.lichngay.R;
-import com.hdpsolutions.lichngay.VNMDate;
-import com.hdpsolutions.lichngay.VietCalendar;
+import com.hdpsolutions.lichngay.calender.VietCalendar;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.Random;
 
 public class DayView extends FrameLayout {
 	private TextView dayOfMonthText;
@@ -53,7 +49,7 @@ public class DayView extends FrameLayout {
 	
 	private void init(Context context) {
 		// Inflate the view from the layout resource.
-		View.inflate(getContext(), R.layout.vnm_day_viewer, this);
+		View.inflate(getContext(), R.layout.layout_ngay, this);
 		this.setFocusable(false);
 		this.setFocusableInTouchMode(false);
 		this.setDrawingCacheEnabled(true);

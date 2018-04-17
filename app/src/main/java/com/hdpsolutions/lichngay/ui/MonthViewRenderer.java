@@ -10,9 +10,9 @@ import android.graphics.Paint.Align;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 
-import com.hdpsolutions.lichngay.EventManager;
-import com.hdpsolutions.lichngay.StreamUtils;
-import com.hdpsolutions.lichngay.VietCalendar;
+import com.hdpsolutions.lichngay.calender.EventManager;
+import com.hdpsolutions.lichngay.calender.StreamUtils;
+import com.hdpsolutions.lichngay.calender.VietCalendar;
 
 import org.json.JSONObject;
 

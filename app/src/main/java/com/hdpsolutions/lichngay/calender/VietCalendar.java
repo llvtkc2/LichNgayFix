@@ -1,4 +1,4 @@
-package com.hdpsolutions.lichngay;
+package com.hdpsolutions.lichngay.calender;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -525,5 +525,18 @@ public class VietCalendar {
 			this.backgroundImageUrls = backgroundImageUrls;
 		}
     	
+    }
+
+    public static int getLeapMonth(int lunarYear, double TimeZone){
+        int a11 = getLunarMonth11(lunarYear-1, TimeZone);
+        int leapOff = getLeapMonthOffset(a11, TimeZone);
+        int leapMonth = leapOff - 2;
+        if(leapOff==13)
+            return -1;
+        else{
+            if (leapMonth < 0)
+                leapMonth += 12;
+        }
+        return leapMonth;
     }
 }

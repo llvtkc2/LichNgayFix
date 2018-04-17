@@ -1,4 +1,4 @@
-package com.hdpsolutions.lichngay;
+package com.hdpsolutions.lichngay.calender;
 
 public class VNMDate {
 	private int dayOfMonth;

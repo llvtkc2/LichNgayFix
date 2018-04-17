@@ -1,6 +1,9 @@
 package com.hdpsolutions.lichngay;
 
 
+import android.app.Dialog;
+import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -11,16 +14,23 @@ import android.widget.LinearLayout.LayoutParams;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.hdpsolutions.lichngay.Adapter.DateArrayAdapter;
+import com.hdpsolutions.lichngay.Adapter.DateNumericAdapter;
+import com.hdpsolutions.lichngay.calender.VNMDate;
+import com.hdpsolutions.lichngay.calender.VietCalendar;
 import com.hdpsolutions.lichngay.ui.ScrollableDayView;
 import com.hdpsolutions.lichngay.ui.ScrollableDayView.OnDateChangedListener;
 import com.hdpsolutions.lichngay.widget.HorizontalScrollView;
 import com.hdpsolutions.lichngay.widget.HorizontalScrollView.OnScreenSelectedListener;
+import com.hdpsolutions.lichngay.widget.WheelView;
 
 import java.util.Calendar;
 import java.util.Date;
 
-public class VNMDayActivity extends AppCompatActivity {
-	
+public class DayActivity extends AppCompatActivity implements OnClickListener{
+
+	WheelView monthSolar,yearSolar,daySolar,monthLunar,yearLunar,dayLunar;
+	String months[];
 	private HorizontalScrollView scrollView;
 	private Date selectedDate;
 	private TextView monthText;
@@ -31,6 +41,7 @@ public class VNMDayActivity extends AppCompatActivity {
 	protected TextView vnmMonthText;
 	protected TextView vnmMonthInText;
 	protected TextView tvToday;
+	private TextView mLichNgay,mLichThang,mDoiNgay,mNhieuHon;
 	
     /** Called when the activity is first created. */
     @Override
@@ -41,6 +52,7 @@ public class VNMDayActivity extends AppCompatActivity {
 				WindowManager.LayoutParams.FLAG_FULLSCREEN);
         this.scrollView = new HorizontalScrollView(this);
         this.setContentView(R.layout.main);
+
         LinearLayout main = findViewById(R.id.main);
 		monthText = findViewById(R.id.monthText);
 		vnmHourText =  findViewById(R.id.vnmHourText);
@@ -50,6 +62,14 @@ public class VNMDayActivity extends AppCompatActivity {
 		vnmMonthText =  findViewById(R.id.vnmMonthText);
 		vnmMonthInText =  findViewById(R.id.vnmMonthInText);
 		tvToday = findViewById(R.id.txttoday);
+
+
+		mLichNgay =  findViewById(R.id.lichngay);
+		mLichThang = findViewById(R.id.lichthang);
+		mDoiNgay = findViewById(R.id.doingay);
+		mNhieuHon = findViewById(R.id.nhieuhon);
+		mDoiNgay.setOnClickListener(this);
+		monthText.setOnClickListener(this);
         
         LayoutParams layoutParams1 = new LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT, 1.0f);
         main.addView(this.scrollView, layoutParams1);
@@ -66,15 +86,49 @@ public class VNMDayActivity extends AppCompatActivity {
 		Calendar calendar =  Calendar.getInstance();
 		calendar.setTime(selectedDate);
 		tvToday.setText(calendar.get(Calendar.DAY_OF_MONTH)+"");
-		tvToday.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				showDate(selectedDate);
-			}
-		});
+		tvToday.setOnClickListener(this);
     }
-    
-    private void showDate(Date date) {
+
+	private void HienThiNgayDuong() {
+		Calendar calendar =  Calendar.getInstance();
+		int curDaySolar = calendar.get(Calendar.DAY_OF_MONTH);
+		int curMonthSolar = calendar.get(Calendar.MONTH);
+		int curYearSolar = calendar.get(Calendar.YEAR);
+		//Hiển thị nên ngày dương
+		// monthSolar
+		months = new String[12];
+		for(int i=0;i<months.length;i++){
+			months[i] = "Tháng " + (i+1);
+		}
+		monthSolar.setViewAdapter(new DateArrayAdapter(this, months, curMonthSolar));
+		monthSolar.setCurrentItem(curMonthSolar);
+//		monthSolar.addScrollingListener(listenerSolar);
+
+		// yearSolar
+		yearSolar.setViewAdapter(new DateNumericAdapter(this, 1900, 2030, curYearSolar-1900));
+		yearSolar.setCurrentItem(curYearSolar-1900);
+//		yearSolar.addScrollingListener(listenerSolar);
+
+		//daySolar
+		updateDays(yearSolar, monthSolar, daySolar);
+		daySolar.setCurrentItem(curDaySolar-1);
+//		daySolar.addScrollingListener(listenerSolar);
+	}
+
+	// Thay đổi ngày 30-31-29 khi chọn tháng năm
+	void updateDays(WheelView year, WheelView month, WheelView day) {
+		Calendar calendar = Calendar.getInstance();
+		calendar.set(Calendar.YEAR, calendar.get(Calendar.YEAR) + year.getCurrentItem());
+		calendar.set(Calendar.MONTH, month.getCurrentItem());
+		int maxDays = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
+		day.setViewAdapter(new DateNumericAdapter(this, 1, maxDays, calendar.get(Calendar.DAY_OF_MONTH) - 1));
+		int curDay = Math.min(maxDays, day.getCurrentItem() + 1);
+		day.setCurrentItem(curDay - 1, true);
+
+
+	}
+
+	private void showDate(Date date) {
     	this.selectedDate = date;
     	int childCount = this.scrollView.getChildCount(); 
 		for (int i = 0; i < 3 - childCount; i++) {
@@ -126,19 +180,19 @@ public class VNMDayActivity extends AppCompatActivity {
     	return currentView.getDate();
 	}
 	
-//	@Override
-//	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-//		if (requestCode == SELECT_DATE && resultCode == RESULT_OK) {
-//			long result = data.getLongExtra(VNMMonthActivity.SELECTED_DATE_RETURN, 0);
-//			Calendar cal = Calendar.getInstance();
-//			cal.setTimeInMillis(result);
-//			showDate(cal.getTime());
-//		}
-//	}
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		if (requestCode == 100 && resultCode == RESULT_OK) {
+			int solar[] = data.getIntArrayExtra("date");
+			Calendar calendar =  Calendar.getInstance();
+			calendar.set(solar[2],solar[1]-1,solar[0]);
+			showDate(calendar.getTime());
+		}
+	}
 	
 	private OnClickListener onClickListener = new OnClickListener() {
 		public void onClick(View v) {
-			Toast.makeText(VNMDayActivity.this, "vào chi tiết", Toast.LENGTH_SHORT).show();
+			Toast.makeText(DayActivity.this, "vào chi tiết", Toast.LENGTH_SHORT).show();
 		}		
 	};
 	
@@ -180,4 +234,30 @@ public class VNMDayActivity extends AppCompatActivity {
 		vnmMonthInText.setText(vnmCalendarTexts[VietCalendar.MONTH]+"\n"+vnmCalendarTexts[VietCalendar.YEAR]);
 	}
 
+	@Override
+	public void onClick(View view) {
+		switch (view.getId()){
+			case R.id.txttoday: showDate(new Date());
+				break;
+			case R.id.doingay: {
+				startActivityForResult(new Intent(DayActivity.this,DoiNgayActivity.class),100);
+				break;
+			}
+			case R.id.monthText: {
+				showdialogSelectDay();
+				break;
+			}
+		}
+	}
+
+	private void showdialogSelectDay() {
+		Dialog dialog =  new Dialog(this);
+		dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+		dialog.setContentView(R.layout.dialog_chonngay);
+		monthSolar = dialog.findViewById(R.id.monthSolard);
+		yearSolar = dialog.findViewById(R.id.yearSolard);
+		daySolar = dialog.findViewById(R.id.daySolard);
+		HienThiNgayDuong();
+		dialog.show();
+	}
 }
